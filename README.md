@@ -261,6 +261,11 @@ cd backend && dotnet test
 
 Testes unitários da `OrderStateMachine`, regras de encomendas por tenant (incl. loja suspensa), resolução de host (`TenantHostResolution`), slugs e validação de pedidos/propostas.
 
+## Como foi construído
+
+Desenvolvido com agentes de programação com IA (Claude Code, Cursor e outros). Defini o produto, a arquitetura e as
+regras de negócio, orientei e revi cada alteração e testei-a.
+
 ## Licença
 
 © 2026 Diogo Pereira. Todos os direitos reservados. O código está público para consulta, como portefólio; não pode ser copiado, alterado nem redistribuído sem autorização.
