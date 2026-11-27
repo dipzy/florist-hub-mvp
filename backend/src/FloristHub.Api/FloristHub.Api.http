@@ -1,0 +1,6 @@
+@FloristHub.Api_HostAddress = http://localhost:5183
+
+GET {{FloristHub.Api_HostAddress}}/health
+Accept: application/json
+
+###

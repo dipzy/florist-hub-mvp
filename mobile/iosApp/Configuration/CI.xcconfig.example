@@ -1,0 +1,2 @@
+// Exemplo local (opcional). No GitHub Actions, o ficheiro CI.xcconfig é gerado pelo workflow.
+FLORIST_HUB_UI_PREVIEW = YES

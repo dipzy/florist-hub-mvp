@@ -1,0 +1,21 @@
+# TestFlight / App Store — DESACTIVADO (requer Apple Developer Program, 99 USD/ano).
+# Para activar no futuro:
+# 1. Criar App ID e app em App Store Connect com o bundle id com.floristhub.ios
+# 2. Adicionar secrets no repositório: APP_STORE_CONNECT_API_KEY_*, MATCH_PASSWORD, etc.
+# 3. Descomentar o lane abaixo e criar workflow separado (não ligar a cada PR).
+
+# default_platform(:ios)
+#
+# platform :ios do
+#   desc "Upload para TestFlight (build de dispositivo, não simulador)"
+#   lane :beta do
+#     setup_ci
+#     match(type: "appstore", readonly: true)
+#     build_app(
+#       project: "iosApp.xcodeproj",
+#       scheme: "iosApp",
+#       export_method: "app-store",
+#     )
+#     upload_to_testflight
+#   end
+# end

@@ -1,0 +1,2 @@
+# SPA. /robots.txt e /sitemap.xml são tratados pela Function em functions/ antes desta regra.
+/*    /index.html   200

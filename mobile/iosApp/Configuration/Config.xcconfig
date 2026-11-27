@@ -1,0 +1,15 @@
+// Bundle e versão (sobrescreva no Xcode ou duplique para flavours)
+PRODUCT_BUNDLE_IDENTIFIER = com.floristhub.ios
+MARKETING_VERSION = 0.1.0
+CURRENT_PROJECT_VERSION = 1
+
+// API base (equivalente a floristHub.apiBaseUrl no Android)
+FLORIST_HUB_API_BASE_URL = http:/$()/127.0.0.1:5183
+FLORIST_HUB_WEB_BASE_URL = http:/$()/127.0.0.1:5173
+FLORIST_HUB_TENANT_SLUG = sao-flores
+
+// Modo pré-visualização para capturas de ecrã em CI (sem API); activar em CI.xcconfig
+FLORIST_HUB_UI_PREVIEW = NO
+
+#include? "CI.xcconfig"
+#include? "Local.xcconfig"

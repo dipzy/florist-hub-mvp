@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{97199E16-CD79-4C1E-81B2-9D357F200F0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloristHub.DAL", "src\FloristHub.DAL\FloristHub.DAL.csproj", "{87F2D9B5-748D-4EF7-9FD1-FAF3D1173CBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloristHub.Services", "src\FloristHub.Services\FloristHub.Services.csproj", "{67A19923-3143-4FD0-9C34-3E4AF252B681}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloristHub.Api", "src\FloristHub.Api\FloristHub.Api.csproj", "{21FE031E-8B25-4A63-AAFF-47F2A5C2575D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1EF2EF43-727D-4198-9BFC-D1DE9B02DAE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloristHub.Services.Tests", "tests\FloristHub.Services.Tests\FloristHub.Services.Tests.csproj", "{07B0CB10-B872-41F7-A198-E95665EBDBBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloristHub.Api.Tests", "tests\FloristHub.Api.Tests\FloristHub.Api.Tests.csproj", "{095AAC3A-D587-40C6-816F-E18F8F6DEE59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloristHub.Api.IntegrationTests", "tests\FloristHub.Api.IntegrationTests\FloristHub.Api.IntegrationTests.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87F2D9B5-748D-4EF7-9FD1-FAF3D1173CBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87F2D9B5-748D-4EF7-9FD1-FAF3D1173CBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87F2D9B5-748D-4EF7-9FD1-FAF3D1173CBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87F2D9B5-748D-4EF7-9FD1-FAF3D1173CBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67A19923-3143-4FD0-9C34-3E4AF252B681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67A19923-3143-4FD0-9C34-3E4AF252B681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67A19923-3143-4FD0-9C34-3E4AF252B681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67A19923-3143-4FD0-9C34-3E4AF252B681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21FE031E-8B25-4A63-AAFF-47F2A5C2575D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21FE031E-8B25-4A63-AAFF-47F2A5C2575D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21FE031E-8B25-4A63-AAFF-47F2A5C2575D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21FE031E-8B25-4A63-AAFF-47F2A5C2575D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07B0CB10-B872-41F7-A198-E95665EBDBBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07B0CB10-B872-41F7-A198-E95665EBDBBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07B0CB10-B872-41F7-A198-E95665EBDBBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07B0CB10-B872-41F7-A198-E95665EBDBBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{095AAC3A-D587-40C6-816F-E18F8F6DEE59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{095AAC3A-D587-40C6-816F-E18F8F6DEE59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{095AAC3A-D587-40C6-816F-E18F8F6DEE59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{095AAC3A-D587-40C6-816F-E18F8F6DEE59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87F2D9B5-748D-4EF7-9FD1-FAF3D1173CBD} = {97199E16-CD79-4C1E-81B2-9D357F200F0C}
+		{67A19923-3143-4FD0-9C34-3E4AF252B681} = {97199E16-CD79-4C1E-81B2-9D357F200F0C}
+		{21FE031E-8B25-4A63-AAFF-47F2A5C2575D} = {97199E16-CD79-4C1E-81B2-9D357F200F0C}
+		{07B0CB10-B872-41F7-A198-E95665EBDBBC} = {1EF2EF43-727D-4198-9BFC-D1DE9B02DAE8}
+		{095AAC3A-D587-40C6-816F-E18F8F6DEE59} = {1EF2EF43-727D-4198-9BFC-D1DE9B02DAE8}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890} = {1EF2EF43-727D-4198-9BFC-D1DE9B02DAE8}
+	EndGlobalSection
+EndGlobal

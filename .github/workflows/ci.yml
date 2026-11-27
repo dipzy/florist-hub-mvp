@@ -1,0 +1,344 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+  checks: write
+
+jobs:
+  changes:
+    name: Deteção de alterações
+    if: github.event_name == 'push' || github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      backend: ${{ steps.filter.outputs.backend }}
+      web: ${{ steps.filter.outputs.web }}
+      mobile: ${{ steps.filter.outputs.mobile }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            backend:
+              - 'backend/**'
+            web:
+              - 'web/**'
+            mobile:
+              - 'mobile/**'
+
+  backend:
+    name: Backend (.NET 10)
+    needs: changes
+    if: |
+      (github.event_name == 'push' || github.event.pull_request.draft == false) &&
+      needs.changes.outputs.backend == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: floristhub_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      ConnectionStrings__DefaultConnection: Host=localhost;Port=5432;Database=floristhub_test;Username=postgres;Password=postgres
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('backend/**/*.csproj', 'backend/**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore
+        run: dotnet restore backend/FloristHub.sln
+
+      - name: Build
+        run: dotnet build backend/FloristHub.sln -c Release --no-restore
+
+      - name: Test
+        run: |
+          dotnet test backend/FloristHub.sln -c Release --no-build \
+            --logger "trx;LogFileName=test_results.trx" \
+            --results-directory "${{ github.workspace }}/TestResults"
+
+      - name: Publicar resultados dos testes
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: ${{ !cancelled() }}
+        with:
+          files: TestResults/**/*.trx
+          check_name: Backend (.NET 10)
+          comment_mode: off
+
+  integration:
+    name: Backend (integração API)
+    needs: changes
+    if: |
+      (github.event_name == 'push' || github.event.pull_request.draft == false) &&
+      needs.changes.outputs.web == 'true' &&
+      needs.changes.outputs.backend != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: floristhub_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      ConnectionStrings__DefaultConnection: Host=localhost;Port=5432;Database=floristhub_test;Username=postgres;Password=postgres
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('backend/**/*.csproj', 'backend/**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Testes de integração
+        run: |
+          dotnet test backend/tests/FloristHub.Api.IntegrationTests/FloristHub.Api.IntegrationTests.csproj -c Release \
+            --logger "trx;LogFileName=integration_results.trx" \
+            --results-directory "${{ github.workspace }}/TestResults"
+
+      - name: Publicar resultados dos testes
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: ${{ !cancelled() }}
+        with:
+          files: TestResults/**/*.trx
+          check_name: Backend (integração)
+          comment_mode: off
+
+  e2e-web:
+    name: Web E2E (Playwright)
+    needs: changes
+    if: |
+      (github.event_name == 'push' || github.event.pull_request.draft == false) &&
+      (needs.changes.outputs.web == 'true' || needs.changes.outputs.backend == 'true')
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: floristhub_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      ConnectionStrings__DefaultConnection: Host=localhost;Port=5432;Database=floristhub_test;Username=postgres;Password=postgres
+      PLAYWRIGHT_BASE_DOMAIN: floristhub.local
+      PLAYWRIGHT_WEB_PORT: "4173"
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('backend/**/*.csproj', 'backend/**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore e build API
+        working-directory: ${{ github.workspace }}
+        run: |
+          dotnet restore backend/src/FloristHub.Api/FloristHub.Api.csproj
+          dotnet build backend/src/FloristHub.Api/FloristHub.Api.csproj -c Release --no-restore
+
+      - name: Arrancar API
+        working-directory: ${{ github.workspace }}/backend/src/FloristHub.Api
+        run: |
+          dotnet run -c Release --no-launch-profile --no-build &
+          for i in $(seq 1 60); do
+            curl -fsS http://127.0.0.1:5183/health && exit 0
+            sleep 2
+          done
+          exit 1
+        env:
+          ASPNETCORE_ENVIRONMENT: Development
+          ASPNETCORE_URLS: http://0.0.0.0:5183
+          Database__MigrateOnStartup: "true"
+          Jwt__Key: FloristHub_CI_Signing_Key_Min_32_Chars
+          App__BaseDomain: floristhub.local
+          Cors__Origins__0: http://127.0.0.1:4173
+          Email__Provider: Log
+          Features__DisableRateLimiting: "true"
+          Jwt__Issuer: FloristHub
+          Jwt__Audience: FloristHubClients
+          Stripe__Provider: Fake
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Instalar dependências e Playwright (Chromium)
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Build e preview da web
+        run: |
+          npm run build
+          npm run preview -- --host 127.0.0.1 --port 4173 &
+          for i in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:4173/ && exit 0
+            sleep 2
+          done
+          exit 1
+        env:
+          VITE_API_BASE_URL: http://127.0.0.1:5183
+          VITE_DEFAULT_TENANT_SLUG: flores-lina
+          VITE_BASE_DOMAIN: floristhub.local
+
+      - name: Testes E2E
+        run: npm run test:e2e
+        env:
+          PLAYWRIGHT_BASE_URL: http://127.0.0.1:4173
+          VITE_BASE_DOMAIN: floristhub.local
+
+  web:
+    name: Web (React + Vite)
+    needs: changes
+    if: |
+      (github.event_name == 'push' || github.event.pull_request.draft == false) &&
+      needs.changes.outputs.web == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Testes
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+  android:
+    name: Android (assembleDebug)
+    needs: changes
+    if: |
+      (github.event_name == 'push' || github.event.pull_request.draft == false) &&
+      needs.changes.outputs.mobile == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      ANDROID_HOME: /usr/local/lib/android/sdk
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
+
+      - name: Instalar componentes Android SDK
+        run: |
+          SDKMANAGER="${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager"
+          if [ ! -x "$SDKMANAGER" ]; then
+            SDKMANAGER="$(find "${ANDROID_HOME}/cmdline-tools" -name sdkmanager -type f | head -1)"
+          fi
+          test -n "$SDKMANAGER" && test -x "$SDKMANAGER"
+          yes | "$SDKMANAGER" --licenses >/dev/null
+          "$SDKMANAGER" "platforms;android-37.0" "build-tools;36.0.0"
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Compilar APK debug
+        run: ./gradlew :androidApp:assembleDebug --no-daemon -Pkotlin.native.ignoreDisabledTargets=true
+
+      - name: Testes unitários Android (Roborazzi + Robolectric)
+        run: |
+          # Comparação pixel-a-pixel difere entre runners; validação visual com verify=true é local/pre-push.
+          ./gradlew :shared:testDebugUnitTest --no-daemon -Pkotlin.native.ignoreDisabledTargets=true -Proborazzi.test.verify=false

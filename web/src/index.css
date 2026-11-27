@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Floral palette */
+  --fh-sage-900: #1e3d32;
+  --fh-sage-800: #2a5244;
+  --fh-sage-700: #356b58;
+  --fh-sage-600: #4a8770;
+  --fh-sage-100: #e8f0ec;
+  --fh-sage-50: #f4f8f6;
+
+  --fh-rose-600: #c4848f;
+  --fh-rose-500: #d4a0a8;
+  --fh-rose-100: #f9ecef;
+  --fh-rose-50: #fdf6f7;
+
+  --fh-cream-100: #faf6f0;
+  --fh-cream-50: #fffcf7;
+
+  --fh-ink: #1c2420;
+  --fh-text: var(--fh-ink);
+  --fh-ink-muted: #5c6b64;
+  --fh-ink-subtle: #8a9891;
+
+  --fh-border: #dde5e0;
+  --fh-border-strong: #c5d0c9;
+
+  --fh-danger: #b42318;
+  --fh-danger-bg: #fdecea;
+  --fh-success: #2d6a4f;
+  --fh-primary: var(--fh-sage-700);
+  --fh-success-bg: #e6f4ed;
+  --fh-warning: #9a6700;
+  --fh-warning-bg: #fff8e6;
+
+  --fh-surface: #ffffff;
+  --fh-surface-raised: #ffffff;
+  --fh-bg: var(--fh-cream-50);
+
+  --fh-shadow-sm: 0 1px 2px rgba(28, 36, 32, 0.06);
+  --fh-shadow-md: 0 4px 16px rgba(28, 36, 32, 0.08);
+  --fh-shadow-lg: 0 12px 40px rgba(28, 36, 32, 0.1);
+
+  --fh-radius-sm: 8px;
+  --fh-radius-md: 12px;
+  --fh-radius-lg: 16px;
+  --fh-radius-full: 9999px;
+
+  --fh-font-serif: 'Fraunces', 'Georgia', serif;
+  --fh-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --fh-space-1: 0.25rem;
+  --fh-space-2: 0.5rem;
+  --fh-space-3: 0.75rem;
+  --fh-space-4: 1rem;
+  --fh-space-5: 1.25rem;
+  --fh-space-6: 1.5rem;
+  --fh-space-8: 2rem;
+  --fh-space-10: 2.5rem;
+
+  --fh-focus-ring: 0 0 0 3px rgba(74, 135, 112, 0.45);
+  --fh-control-hover: var(--fh-sage-50);
+  --fh-control-disabled: #e7eeea;
+  --fh-control-disabled-fg: #5c6b64;
+
+  color-scheme: light;
+  font-family: var(--fh-font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--fh-ink);
+  background: var(--fh-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+:root[data-fh-resolved-theme='dark'] {
+    color-scheme: dark;
+
+    --fh-sage-900: #a8d4c4;
+    --fh-sage-800: #8fbfad;
+    --fh-sage-700: #7aab98;
+    --fh-sage-600: #6a9a87;
+    --fh-sage-100: #243029;
+    --fh-sage-50: #1a211e;
+
+    --fh-rose-600: #e8b4bc;
+    --fh-rose-500: #d9a0aa;
+    --fh-rose-100: #2e2225;
+    --fh-rose-50: #1f181a;
+
+    --fh-cream-100: #242220;
+    --fh-cream-50: #141614;
+
+    --fh-ink: #eef2ef;
+    --fh-text: var(--fh-ink);
+    --fh-ink-muted: #a8b5ae;
+    --fh-ink-subtle: #7d8a84;
+
+    --fh-border: #2e3833;
+    --fh-border-strong: #3d4842;
+
+    --fh-danger-bg: #3a1f1d;
+    --fh-success-bg: #1d2e26;
+    --fh-warning-bg: #2e2818;
+
+    --fh-surface: #1e2421;
+    --fh-surface-raised: #252b28;
+    --fh-bg: #121514;
+
+    --fh-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --fh-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+    --fh-shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.45);
+    --fh-control-hover: #2a3330;
+    --fh-control-disabled: #2a312e;
+    --fh-control-disabled-fg: #8b9892;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--fh-font-serif);
+  font-weight: 600;
+  color: var(--fh-ink);
+  line-height: 1.2;
+  margin: 0 0 var(--fh-space-3);
+}
+
+h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+}
+
+h3 {
+  font-size: 1.125rem;
+}
+
+p {
+  margin: 0 0 var(--fh-space-3);
+}
+
+a {
+  color: var(--fh-sage-700);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--fh-sage-800);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--fh-focus-ring);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}

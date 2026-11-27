@@ -1,0 +1,805 @@
+{
+  "common": {
+    "loading": "A carregar…",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "chooseFile": "Escolher ficheiro",
+    "close": "Fechar",
+    "edit": "Editar",
+    "new": "Novo",
+    "yes": "Sim",
+    "no": "Não",
+    "search": "Pesquisar…",
+    "retry": "Tentar de novo",
+    "document": "Documento",
+    "error": "Erro",
+    "name": "Nome",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "unavailableNow": "Indisponível neste momento",
+    "paid": "pago",
+    "payment": "pagamento",
+    "outOfStock": "Esgotada",
+    "outOfStockSuffix": "esgotada",
+    "noSlot": "sem vaga",
+    "hidden": "oculta",
+    "floristChoice": "Escolha da florista",
+    "floristChoiceParen": "(escolha da florista)",
+    "required": "(obrigatório)",
+    "lowStock": "baixo",
+    "dash": "—",
+    "roles": {
+      "cliente": "Cliente",
+      "florista": "Florista",
+      "superAdmin": "SuperAdmin"
+    },
+    "portfolio": "Portfolio",
+    "floristHub": "Florist Hub"
+  },
+  "nav": {
+    "ariaMain": "Navegação principal",
+    "store": "Loja",
+    "portfolio": "Portfolio",
+    "buildArrangement": "Montar arranjo",
+    "flowers": "Flores",
+    "orders": "Encomendas",
+    "recurring": "Recorrências",
+    "floristPanel": "Painel da florista",
+    "superAdmin": "SuperAdmin",
+    "login": "Entrar",
+    "logout": "Sair",
+    "account": "Conta"
+  },
+  "footer": {
+    "terms": "Termos",
+    "privacy": "Privacidade",
+    "cookies": "Cookies",
+    "myData": "Os meus dados"
+  },
+  "legal": {
+    "accept": {
+      "lede": "Li e aceito os",
+      "and": "e a",
+      "version": "v{{version}}",
+      "marketing": "Aceito comunicações de marketing (opcional)."
+    }
+  },
+  "delivery": {
+    "picker": {
+      "legend": "Data e hora pretendidas",
+      "selected": "Selecionado: {{value}}",
+      "date": "Data",
+      "noDates": "Sem datas disponíveis",
+      "window": "Janela de entrega",
+      "selectPlaceholder": "— Selecionar —",
+      "windowOption": "{{label}} ({{start}}–{{end}}) · {{remaining}} vagas",
+      "time": "Hora (intervalos de {{minutes}} min)",
+      "noSlotsDefault": "Sem horários disponíveis neste dia (antecedência mínima ou horário da loja).",
+      "noSlotsAdvance": "Há vagas neste dia, mas a antecedência mínima impede todos os horários restantes.",
+      "noSlotsWindows": "Sem vagas nas janelas de entrega para este dia."
+    }
+  },
+  "adminShell": {
+    "managementMenu": "Menu de gestão",
+    "storeManagement": "Gestão da loja",
+    "viewStoreAsCustomer": "Ver loja (cliente)",
+    "platform": "Plataforma",
+    "superAdminAria": "SuperAdmin"
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Painel",
+      "onboarding": "Configuração inicial",
+      "settings": "Definições da loja",
+      "catalog": "Catálogo",
+      "capacity": "Capacidade",
+      "portfolio": "Portfolio",
+      "orders": "Encomendas",
+      "unreadNotifications": "{{count}} notificações por ler",
+      "recurring": "Recorrências",
+      "payments": "Pagamentos",
+      "invoicing": "Faturação",
+      "customers": "Clientes",
+      "coupons": "Cupões",
+      "campaigns": "Datas especiais",
+      "reviews": "Avaliações",
+      "gdpr": "RGPD"
+    },
+    "loadError": "Não foi possível carregar esta página. Os dados da loja não foram alterados.",
+    "orders": {
+      "includesDeliveryFee": "incl. {{fee}} entrega"
+    },
+    "catalog": {
+      "title": "Catálogo",
+      "quickTitle": "Flor rápida",
+      "quickLede": "Foto, nome, preço e stock — o resto pode editar depois.",
+      "photo": "Foto",
+      "price": "Preço",
+      "stock": "Stock",
+      "createQuick": "Criar flor",
+      "colPrice": "Preço",
+      "colVat": "IVA",
+      "colUnit": "Unidade",
+      "colStock": "Existências",
+      "colOrderable": "Encomendável",
+      "colActive": "Ativo no catálogo",
+      "delete": "Apagar",
+      "storeVat": "Loja",
+      "editItem": "Editar item",
+      "newItem": "Novo item",
+      "category": "Categoria",
+      "seasonMonths": "Meses de época (1-12, separados por vírgula)",
+      "unitPrice": "Preço unitário",
+      "vatRate": "Taxa da loja",
+      "minStock": "Existências mínimas (aviso)",
+      "optionalStock": "Existências (opcional)",
+      "orderableFlag": "Disponível para encomendas",
+      "activeFlag": "Ativo no catálogo",
+      "saveItem": "Guardar item",
+      "updated": "Catálogo atualizado.",
+      "saveError": "Erro ao guardar item.",
+      "removed": "Item removido ou desativado (se estava em encomendas).",
+      "created": "Flor criada.",
+      "createError": "Erro ao criar flor rápida.",
+      "pageOf": "Página {{page}} / {{pages}}"
+    },
+    "capacity": {
+      "windowName": "Nome da janela",
+      "windowStart": "Início (HH:MM)",
+      "windowEnd": "Fim (HH:MM)",
+      "windowLimit": "Limite de encomendas",
+      "removeWindow": "Remover janela"
+    },
+    "settings": {
+      "tabStore": "Loja",
+      "tabDeliveries": "Entregas",
+      "tabHours": "Horário",
+      "tabAppearance": "Aparência",
+      "tabsAria": "Separadores",
+      "primaryColor": "Cor principal",
+      "accentColor": "Cor de destaque",
+      "suggestedPalettes": "Paletas sugeridas",
+      "paletteSaoFlores": "São Flores",
+      "paletteForest": "Verde floresta",
+      "paletteLavender": "Lavanda",
+      "paletteClassic": "Clássico",
+      "livePreview": "Pré-visualização ao vivo",
+      "contrastWarning": "Uma destas cores pode ser difícil de ler sobre o fundo claro da loja. Considere tons mais escuros ou saturados."
+    },
+    "compliance": {
+      "title": "Registo RGPD",
+      "lede": "Eventos de consentimento, exportação e anonimização na sua loja ({{count}} registos).",
+      "colDate": "Data",
+      "colAction": "Ação",
+      "colDetail": "Detalhe"
+    }
+  },
+  "superadmin": {
+    "nav": {
+      "tenants": "Lojas",
+      "billing": "Comissão",
+      "metrics": "Métricas",
+      "gdpr": "RGPD"
+    },
+    "metrics": {
+      "title": "Métricas da plataforma",
+      "lede": "Encomendas, GMV e adopção.",
+      "activeStores": "Lojas ativas",
+      "ordersPeriod": "Encomendas ({{days}}d)",
+      "gmvPeriod": "GMV ({{days}}d)",
+      "gmvNote": "Só encomendas com pagamento capturado.",
+      "commissionPeriod": "Comissão ({{days}}d)",
+      "stripeConnected": "Stripe ligado",
+      "newStoresMonth": "Novas lojas (mês)",
+      "chartTitle": "Encomendas e GMV",
+      "topStores": "Top lojas por GMV",
+      "colStore": "Loja",
+      "colOrders": "Encomendas",
+      "colGmv": "GMV",
+      "newByMonth": "Novas lojas por mês",
+      "daysChip": "{{days}} dias",
+      "loadError": "Não foi possível carregar métricas da plataforma.",
+      "loading": "A carregar métricas…"
+    },
+    "compliance": {
+      "title": "Auditoria RGPD",
+      "lede": "{{count}} eventos recentes em todas as lojas.",
+      "emptyTitle": "Sem registos de auditoria",
+      "emptyDesc": "Quando houver acções relevantes de privacidade ou consentimento na plataforma, aparecem aqui.",
+      "colDate": "Data",
+      "colStore": "Loja",
+      "colAction": "Ação",
+      "colDetail": "Detalhe"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Entrar",
+      "titleWithStore": "Entrar — {{storeName}}",
+      "lede": "Use o email e a palavra-passe da sua conta.",
+      "email": "Correio eletrónico",
+      "password": "Palavra-passe",
+      "submit": "Entrar",
+      "noAccount": "Ainda não tem conta?",
+      "registerLink": "Registar",
+      "errorGeneric": "Email ou palavra-passe incorretos."
+    },
+    "register": {
+      "title": "Registar",
+      "lede": "Cliente nesta loja ou nova loja de florista.",
+      "role": "Perfil",
+      "cliente": "Cliente",
+      "floristaNewStore": "Florista (nova loja)",
+      "storeName": "Nome da loja",
+      "storeSlug": "Slug (subdomínio)",
+      "linkedToVisitedStore": "A conta ficará associada à loja que está a visitar.",
+      "fullName": "Nome completo",
+      "legalRequired": "Tem de aceitar os Termos e a Política de Privacidade.",
+      "tenantUnknown": "Não foi possível identificar a loja. Abra o site da florista e tente de novo.",
+      "submit": "Criar conta",
+      "failure": "Falha no registo",
+      "hasAccount": "Já tem conta?"
+    }
+  },
+  "cookies": {
+    "bannerAria": "Consentimento de cookies",
+    "message": "Cookies essenciais para a sessão; opcionalmente monitorização de erros.",
+    "policyLink": "Política de Cookies",
+    "essentialOnly": "Apenas essenciais",
+    "acceptAll": "Aceitar todos"
+  },
+  "preferences": {
+    "sectionTitle": "Aparência e idioma",
+    "sectionDescription": "Escolha o tema da interface e o idioma preferido neste dispositivo.",
+    "language": {
+      "label": "Idioma",
+      "portugal": "Português (Portugal)",
+      "english": "English"
+    },
+    "appearance": {
+      "label": "Tema",
+      "light": "Claro",
+      "dark": "Escuro",
+      "system": "Sistema"
+    }
+  },
+  "errors": {
+    "generic": "Ocorreu um erro. Tente novamente.",
+    "requestDenied": "Pedido recusado.",
+    "loadFailed": "Não foi possível carregar",
+    "loadFailedTitle": "Não foi possível carregar"
+  },
+  "session": {
+    "superAdminPlatform": "SuperAdmin (plataforma)",
+    "storeFallback": "Loja"
+  },
+  "account": {
+    "title": "Perfil",
+    "lede": "Informação da conta e, quando aplicável, mudança entre a plataforma e as suas lojas.",
+    "sectionAccount": "Conta",
+    "email": "E-mail",
+    "contextSection": "Contexto de trabalho",
+    "refreshingContexts": "A atualizar contextos…",
+    "singleContext": "Só tem um contexto disponível",
+    "activeBadge": "Ativo",
+    "switchTo": "Mudar para aqui",
+    "switching": "A mudar…",
+    "contextsLoadError": "Não foi possível carregar os contextos disponíveis.",
+    "contextSwitchError": "Não foi possível mudar de contexto."
+  },
+  "app": {
+    "embedConfiguratorLoading": "A preparar o configurador…"
+  },
+  "build": {
+    "noCatalog": "Sem flores disponíveis neste momento.",
+    "decreaseQty": "Diminuir quantidade",
+    "increaseQty": "Aumentar quantidade",
+    "yourArrangement": "O seu arranjo",
+    "removeLine": "Remover {{name}}",
+    "clearAll": "Limpar tudo",
+    "clearAllConfirm": "Remover todas as flores do arranjo?",
+    "emptyBasket": "Ainda sem flores no arranjo.",
+    "continueDelivery": "Continuar para entrega",
+    "continueToConfirm": "Continuar para confirmação",
+    "addFlowersHint": "Adicione pelo menos uma flor para continuar.",
+    "subtotal": "Subtotal",
+    "deliveryFee": "Taxa de entrega",
+    "estimatedTotal": "Total estimado",
+    "steps": {
+      "aria": "Passos da encomenda",
+      "arrangement": "Arranjo",
+      "delivery": "Entrega",
+      "confirm": "Confirmação"
+    }
+  },
+  "loading": {
+    "order": "A carregar a encomenda…",
+    "arrangement": "A carregar arranjo…",
+    "wizard": "A carregar assistente…",
+    "campaign": "A carregar campanha…",
+    "settings": "A carregar definições…",
+    "document": "A carregar documento…",
+    "invoicing": "A carregar faturação…",
+    "seasonal": "A carregar flores da época…",
+    "store": "A carregar loja…",
+    "metrics": "A carregar métricas…",
+    "dashboard": "A carregar o dashboard…"
+  },
+  "store": {
+    "defaultName": "A sua florista online",
+    "heroCtaBuild": "Montar o meu arranjo",
+    "portfolioHeading": "Portfolio",
+    "inspireLede": "Inspire-se e monte o seu arranjo.",
+    "inspireLedeCheckout": "Inspire-se e personalize numa nova encomenda.",
+    "emptyPortfolioTitle": "Ainda sem arranjos no portfolio",
+    "emptyPortfolioDescription": "Volte em breve — a florista está a preparar novas criações.",
+    "useInspiration": "Usar inspiração",
+    "soonNewTitle": "Em breve novos arranjos",
+    "soonNewDescription": "Explore o portfolio ou monte o seu arranjo com o catálogo da loja.",
+    "reviews_one": "avaliação",
+    "reviews_other": "avaliações",
+    "seasonalTitle": "Flores da época",
+    "seasonalMeta": "Flores de época disponíveis nesta loja.",
+    "notFound": "Loja não encontrada",
+    "openFromFlorist": "Abra a página a partir da florista.",
+    "noSeasonalTitle": "Sem flores de época este mês",
+    "noSeasonalDescription": "O catálogo completo continua disponível ao montar um arranjo.",
+    "campaignUnavailableTitle": "Campanha indisponível",
+    "campaignUnavailableDescription": "Esta campanha não está ativa.",
+    "campaignDefaultMeta": "Campanha da florista.",
+    "arrangementNotFoundTitle": "Arranjo não encontrado",
+    "arrangementNotFoundDescription": "Este endereço não corresponde a um arranjo publicado.",
+    "arrangementPortfolioMeta": "Arranjo do portfolio.",
+    "orderFromFloristMeta": "Encomende flores e arranjos nesta florista.",
+    "floristSuffix": "florista",
+    "campaignSuffix": "campanha",
+    "inspireFromPortfolio": "Inspirar-me neste arranjo",
+    "flowersCatalogLede": "Catálogo da loja para inspirar o seu arranjo."
+  },
+  "order": {
+    "status": {
+      "0": "Pendente de confirmação",
+      "1": "Confirmada",
+      "2": "Em preparação",
+      "3": "Pronta",
+      "4": "Entregue",
+      "5": "Cancelada",
+      "6": "Recusada"
+    },
+    "paymentStatus": {
+      "0": "Pendente",
+      "1": "Pago",
+      "2": "Falhado",
+      "3": "Reembolsado parcialmente",
+      "4": "Reembolsado",
+      "5": "Cancelado"
+    },
+    "deliveryType": {
+      "0": "Levantamento na loja",
+      "1": "Entrega ao domicílio",
+      "2": "Cemitério / outro local"
+    }
+  },
+  "invoice": {
+    "kind": {
+      "0": "Fatura-recibo",
+      "1": "Nota de crédito"
+    },
+    "status": {
+      "0": "Pendente",
+      "1": "Emitida",
+      "2": "Falhada"
+    }
+  },
+  "configurator": {
+    "base": {
+      "0": "Jarra",
+      "1": "Esponja",
+      "2": "Embrulho"
+    },
+    "shape": {
+      "0": "Esponja",
+      "1": "Comprido",
+      "2": "Curto"
+    },
+    "format": "Formato",
+    "withVase": "com vaso",
+    "foamNoVase": "esponja, sem vaso",
+    "wrapNoVase": "embrulho, sem vaso",
+    "variation": "variação",
+    "stemCount": "{{count}} flores",
+    "anotherVariation": "Gerar outra variação",
+    "shapeHeading": "Formato",
+    "baseHeading": "Base"
+  },
+  "plural": {
+    "day_one": "dia",
+    "day_other": "dias",
+    "order_one": "encomenda",
+    "order_other": "encomendas"
+  },
+  "tenant": {
+    "createSuccess": {
+      "inviteSent": "Loja {{name}} criada. Foi enviado um convite por email à florista para definir a palavra-passe (válido 72 horas).",
+      "existingAccount": "Loja {{name}} criada. A conta existente foi associada como florista; não foi enviado convite por email."
+    }
+  },
+  "florist": {
+    "filter": {
+      "all": "Todas",
+      "pending": "Pendentes",
+      "confirmed": "Confirmadas",
+      "inPrep": "Em preparação",
+      "ready": "Prontas",
+      "delivered": "Entregues",
+      "empty": "Sem encomendas neste filtro."
+    },
+    "action": {
+      "markInPrep": "Marcar em preparação",
+      "markReady": "Marcar pronta",
+      "markDelivered": "Marcar entregue"
+    },
+    "proposalStatus": {
+      "0": "Pendente",
+      "1": "Aceite",
+      "2": "Recusada",
+      "3": "Retirada",
+      "clientRejected": "Recusada pelo cliente"
+    },
+    "board": {
+      "aria": "Quadro por estado",
+      "none": "Nenhuma",
+      "updateOnBoard": "Atualização no quadro"
+    },
+    "customerFallback": "Cliente"
+  },
+  "tracking": {
+    "title": "Acompanhar encomenda",
+    "loading": "A carregar o estado da encomenda…",
+    "ref": "Referência",
+    "statusHeading": "Estado",
+    "deliveryHeading": "Entrega",
+    "windowHeading": "Janela de entrega",
+    "timelineHeading": "Linha do tempo",
+    "confirmWithFlorist": "A confirmar com a florista",
+    "backToShop": "Voltar à loja",
+    "loadError": "Não foi possível carregar o acompanhamento. Verifique o link ou a loja."
+  },
+  "panelNotifications": {
+    "heading": "Novidades nas encomendas",
+    "markRead": "Marcar como lidas",
+    "paymentReceived": "Pagamento recebido",
+    "newOrder": "Nova encomenda",
+    "empty": "Sem novidades de momento."
+  },
+  "dashboard": {
+    "loadError": "Não foi possível carregar o dashboard.",
+    "storeSetup": "Preparação da loja",
+    "continueSetup": "Continuar configuração",
+    "lowStockPrefix": "Existências baixas:",
+    "deliveriesToday": "Entregas hoje",
+    "deliveriesTomorrow": "Entregas amanhã",
+    "confirmedStat": "Confirmadas",
+    "inPrepStat": "Em preparação",
+    "readyStat": "Prontas"
+  },
+  "reviews": {
+    "submit": "Enviar avaliação",
+    "yourReview": "A sua avaliação:",
+    "stars": "estrelas",
+    "empty": "Ainda não há avaliações.",
+    "reply": "Resposta"
+  },
+  "checkout": {
+    "submitHint": {
+      "guest": "Entra ou cria uma conta de cliente para submeter a encomenda.",
+      "wrongRole": "Para submeter uma encomenda nesta loja, entra com uma conta de cliente (ou cria registo de cliente)."
+    }
+  },
+  "pages": {
+    "api": {
+      "client": {
+        "x_tenant_id": "X-Tenant-Id"
+      },
+      "types": {
+        "em_preparacao": "Em preparação",
+        "a_espera_da_florista": "À espera da florista",
+        "em_pausa": "Em pausa"
+      }
+    },
+    "components": {
+      "AppearanceSelect": {
+        "test": {
+          "testing_library_react": "@testing-library/react"
+        },
+        "fh_theme_select_label": "fh-theme-select__label",
+        "fh_theme_select_control": "fh-theme-select__control"
+      },
+      "DeliveryDateTimePicker": {
+        "t12_00_00": "T12:00:00",
+        "sem_vaga": " — sem vaga"
+      },
+      "LanguageSelect": {
+        "test": {
+          "testing_library_react": "@testing-library/react"
+        },
+        "fh_locale_select": "fh-locale-select",
+        "fh_locale_select_label": "fh-locale-select__label",
+        "fh_locale_select_control": "fh-locale-select__control"
+      },
+      "Layout": {
+        "classname": " className="
+      },
+      "LegalMarkdown": {
+        "text_paragraph_join": ", text: paragraph.join(",
+        "split": ").split("
+      },
+      "Logo": {
+        "fh_logo_compact": " fh-logo--compact",
+        "fh_logo_subtitle": "fh-logo__subtitle"
+      },
+      "UiPreferencesPanel": {
+        "ui_preferences_heading": "ui-preferences-heading"
+      },
+      "admin": {
+        "FloristDashboardCharts": {
+          "2_digit": "2-digit"
+        },
+        "OnboardingChecklist": {
+          "compact": " compact",
+          "obrigatorio": " (obrigatório)"
+        }
+      },
+      "ui": {
+        "Card": {
+          "fh_card_elevated": " fh-card--elevated"
+        },
+        "EmptyState": {
+          "fh_empty_action": "fh-empty__action"
+        },
+        "Input": {
+          "fh_field_error": " fh-field--error"
+        },
+        "Modal": {
+          "fh_modal_backdrop": "fh-modal-backdrop",
+          "fh_modal_header": "fh-modal__header",
+          "fh_modal_footer": "fh-modal__footer"
+        },
+        "Select": {
+          "fh_field_error": " fh-field--error"
+        },
+        "Skeleton": {
+          "variant": ", variant = ",
+          "a_carregar": "A carregar",
+          "fh_card_fh_card_pad_md": "fh-card fh-card--pad-md"
+        }
+      }
+    },
+    "configurator": {
+      "ArrangementConfigurator": {
+        "react_three_fiber": "@react-three/fiber",
+        "pre_visualizacao_3d_do_arranjo": "Pré-visualização 3D do arranjo"
+      },
+      "ArrangementFallback2D": {
+        "2d": "2d",
+        "pre_visualizacao_2d_do_arranjo": "Pré-visualização 2D do arranjo"
+      },
+      "ArrangementScene": {
+        "react_three_drei": "@react-three/drei",
+        "react_three_fiber": "@react-three/fiber"
+      },
+      "FlowerMesh": {
+        "react_three_drei": "@react-three/drei"
+      },
+      "InstancedBouquet": {
+        "react_three_fiber": "@react-three/fiber"
+      },
+      "OrderArrangementPreview": {
+        "pre_visualizacao_do_arranjo_enviada_com_a_encome": "Pré-visualização do arranjo enviada com a encomenda"
+      },
+      "bloomGeometry": {
+        "nao_foi_possivel_fundir_a_geometria_da_flor": "Não foi possível fundir a geometria da flor."
+      },
+      "colors": {
+        "join": ")).join("
+      },
+      "demoBouquet": {
+        "tulipa_amarela": "Túlipa amarela",
+        "lirio": "Lírio"
+      },
+      "webgl": {
+        "pointer_coarse": "(pointer: coarse)"
+      }
+    },
+    "lib": {
+      "apiError": {
+        "trimmed_startswith": ") || trimmed.startsWith("
+      },
+      "deliveryScheduling": {
+        "t12_00_00": "T12:00:00",
+        "t00_00_00": "T00:00:00",
+        "2_digit": "2-digit"
+      },
+      "floristInviteResend": {
+        "a_conta_da_florista_ja_esta_ativa_por_exemplo_ao": "A conta da florista já está ativa (por exemplo, ao associar uma conta existente). Não há convite pendente para reenviar."
+      },
+      "publicTenant": {
+        "localhost": ".localhost",
+        "x_tenant_id": "X-Tenant-Id",
+        "x_tenant_slug": "X-Tenant-Slug"
+      },
+      "sentryInit": {
+        "sentry_react": "@sentry/react"
+      },
+      "storeOrderRules": {
+        "sabado": "sábado"
+      },
+      "storeTheme": {
+        "serif": ", serif"
+      },
+      "uiAppearance": {
+        "prefers_color_scheme_dark": "(prefers-color-scheme: dark)"
+      }
+    },
+    "pages": {
+      "BuildArrangementPage": {
+        "nao_foi_possivel_carregar_as_definicoes_da_loja": "Não foi possível carregar as definições da loja.",
+        "esgotada": " · esgotada",
+        "ex_1000_001": "ex.: 1000-001",
+        "codigo": "Código"
+      },
+      "EmbedConfiguratorPage": {
+        "nao_foi_possivel_carregar_o_catalogo_desta_loja": "Não foi possível carregar o catálogo desta loja."
+      },
+      "FloristDashboardPage": {
+        "em_preparacao": "Em preparação",
+        "nao_foi_possivel_criar_o_arranjo": "Não foi possível criar o arranjo.",
+        "ex_substituir_tulipas_por_rosas": "Ex.: substituir túlipas por rosas"
+      },
+      "FloristInvitePage": {
+        "as_palavras_passe_nao_coincidem": "As palavras-passe não coincidem.",
+        "a_palavra_passe_deve_ter_pelo_menos_8_caracteres": "A palavra-passe deve ter pelo menos 8 caracteres.",
+        "nao_foi_possivel_concluir_o_convite": "Não foi possível concluir o convite."
+      },
+      "LegalDocumentPage": {
+        "a_carregar_documento": "A carregar documento…"
+      },
+      "LoginPage": {
+        "raw_startswith": ") || raw.startsWith(",
+        "1_25rem": "1.25rem"
+      },
+      "OrderDetailPage": {
+        "nao_foi_possivel_iniciar_o_pagamento": "Não foi possível iniciar o pagamento.",
+        "a_carregar_a_encomenda": "A carregar a encomenda…",
+        "1rem": "1rem",
+        "codigo_do_cupao": "Código do cupão"
+      },
+      "PaymentResultPage": {
+        "o_pagamento_foi_registado_a_florista_pode_avanca": "O pagamento foi registado. A florista pode avançar com a encomenda.",
+        "o_pagamento_nao_foi_concluido_pode_voltar_a_enco": "O pagamento não foi concluído. Pode voltar à encomenda e tentar de novo."
+      },
+      "PortfolioPage": {
+        "a_sua_florista_online": "A sua florista online",
+        "fh_btn_fh_btn_primary_fh_btn_lg": "fh-btn fh-btn--primary fh-btn--lg"
+      },
+      "PrivacySettingsPage": {
+        "nao_foi_possivel_anonimizar": "Não foi possível anonimizar."
+      },
+      "RecurringSubscriptionsPage": {
+        "nao_foi_possivel_carregar_as_recorrencias": "Não foi possível carregar as recorrências.",
+        "nao_foi_possivel_criar_a_recorrencia_verifique_o": "Não foi possível criar a recorrência. Verifique os dados.",
+        "step": " step=",
+        "1_5rem": "1.5rem",
+        "escolha_da_florista": " (escolha da florista)"
+      },
+      "RegisterPage": {
+        "raw_startswith": ") || raw.startsWith(",
+        "nao_foi_possivel_identificar_a_loja_abra_o_site_": "Não foi possível identificar a loja. Abra o site da florista e tente de novo.",
+        "1_25rem": "1.25rem"
+      },
+      "StorePublicPages": {
+        "a_sua_florista_online": "A sua florista online",
+        "fh_btn_fh_btn_primary_fh_btn_lg": "fh-btn fh-btn--primary fh-btn--lg",
+        "em_breve_novos_arranjos": "Em breve novos arranjos",
+        "1_25rem": "1.25rem",
+        "a_carregar_flores_da_epoca": "A carregar flores da época…",
+        "o_catalogo_completo_continua_disponivel_ao_monta": "O catálogo completo continua disponível ao montar um arranjo.",
+        "esgotada": " — esgotada",
+        "a_carregar_campanha": "A carregar campanha…",
+        "0_5rem_0_0": "0.5rem 0 0",
+        "a_carregar_arranjo": "A carregar arranjo…"
+      },
+      "admin": {
+        "AdminCapacityPage": {
+          "nao_foi_possivel_carregar_a_capacidade": "Não foi possível carregar a capacidade.",
+          "nao_foi_possivel_guardar_o_limite": "Não foi possível guardar o limite.",
+          "nao_foi_possivel_guardar_a_excecao": "Não foi possível guardar a exceção.",
+          "day_remaining": " : (day.remaining ?? "
+        },
+        "AdminCatalogPage": {
+          "baixo": " · baixo",
+          "esgotada": " · esgotada",
+          "nao": "Não"
+        },
+        "AdminDashboardPage": {
+          "nao_foi_possivel_carregar_o_dashboard": "Não foi possível carregar o dashboard.",
+          "a_carregar_o_dashboard": "A carregar o dashboard…"
+        },
+        "AdminInvoicesPage": {
+          "23_continente": "23% — Continente",
+          "22_madeira": "22% — Madeira",
+          "16_acores": "16% — Açores",
+          "13_taxa_intermedia": "13% — taxa intermédia",
+          "6_taxa_reduzida": "6% — taxa reduzida",
+          "0_isento": "0% — isento",
+          "nao_foi_possivel_carregar_a_faturacao": "Não foi possível carregar a faturação.",
+          "nao_foi_possivel_guardar": "Não foi possível guardar.",
+          "nao_foi_possivel_descarregar_o_pdf": "Não foi possível descarregar o PDF.",
+          "nao_foi_possivel_repetir_a_emissao": "Não foi possível repetir a emissão.",
+          "a_carregar_faturacao": "A carregar faturação…",
+          "ja_guardada_preencha_so_para_substituir": "Já guardada. Preencha só para substituir."
+        },
+        "AdminMarketingPages": {
+          "nao_foi_possivel_guardar_o_cupao": "Não foi possível guardar o cupão.",
+          "nao_foi_possivel_guardar_a_campanha": "Não foi possível guardar a campanha.",
+          "destaque_na_loja": "· destaque na loja",
+          "oculta": " · oculta"
+        },
+        "AdminOnboardingWizardPage": {
+          "nao_foi_possivel_carregar_o_assistente": "Não foi possível carregar o assistente.",
+          "nao_foi_possivel_guardar": "Não foi possível guardar.",
+          "a_carregar_assistente": "A carregar assistente…"
+        },
+        "AdminOrdersPage": {
+          "em_preparacao": "Em preparação",
+          "pago": " · pago",
+          "pre_visualizacao_do_arranjo": "Pré-visualização do arranjo"
+        },
+        "AdminPaymentsPage": {
+          "nao_foi_possivel_abrir_a_ligacao_stripe": "Não foi possível abrir a ligação Stripe.",
+          "mb_way": "MB Way",
+          "a_conta_esta_pronta_a_receber_pagamentos": "A conta está pronta a receber pagamentos.",
+          "a_conta_esta_ligada_mas_o_stripe_ainda_nao_autor": "A conta está ligada, mas o Stripe ainda não autorizou cobranças."
+        },
+        "AdminRecurringPage": {
+          "nao_foi_possivel_carregar_recorrencias": "Não foi possível carregar recorrências.",
+          "escolha_da_florista": " · Escolha da florista",
+          "2rem": "2rem",
+          "1rem": "1rem"
+        },
+        "AdminStoreSettingsPage": {
+          "sabado": "Sábado",
+          "nao_foi_possivel_guardar": "Não foi possível guardar.",
+          "a_carregar_definicoes": "A carregar definições…",
+          "classname": " className=",
+          "name": ", name: "
+        }
+      },
+      "superadmin": {
+        "SuperAdminBillingPage": {
+          "fh_btn_fh_btn_primary_fh_btn_md": "fh-btn fh-btn--primary fh-btn--md"
+        },
+        "SuperAdminMetricsPage": {
+          "nao_foi_possivel_carregar_metricas_da_plataforma": "Não foi possível carregar métricas da plataforma.",
+          "a_carregar_metricas": "A carregar métricas…",
+          "1_5rem": "1.5rem",
+          "2_digit": "2-digit",
+          "1rem": "1rem"
+        },
+        "SuperAdminTenantDetailPage": {
+          "a_carregar_loja": "A carregar loja…",
+          "nao": "não",
+          "null_number_commission_replace": " ? null : Number(commission.replace(",
+          "null_number_monthly_replace": " ? null : Number(monthly.replace("
+        },
+        "SuperAdminTenantsPage": {
+          "slug": ", slug: ",
+          "floristemail": ", floristEmail: ",
+          "floristfullname": ", floristFullName: ",
+          "customdomain": ", customDomain: ",
+          "nao_foi_possivel_criar_a_loja": "Não foi possível criar a loja."
+        }
+      }
+    }
+  }
+}

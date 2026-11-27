@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: floristhub-postgres
+    environment:
+      POSTGRES_DB: floristhub
+      POSTGRES_USER: floristhub
+      POSTGRES_PASSWORD: floristhub
+    ports:
+      - "5432:5432"
+    volumes:
+      - floristhub_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U floristhub -d floristhub"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    profiles: ["api"]
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: floristhub-api:local
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      PORT: "8080"
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=floristhub;Username=floristhub;Password=floristhub
+      Database__MigrateOnStartup: "true"
+      Jwt__Key: local-compose-only-not-a-secret-32ch
+      Jwt__Issuer: FloristHub
+      Jwt__Audience: FloristHubClients
+      Storage__Provider: Local
+      Email__Provider: Log
+      Serilog__MinimumLevel__Default: Information
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  floristhub_pgdata:

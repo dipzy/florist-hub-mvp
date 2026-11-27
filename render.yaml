@@ -1,0 +1,83 @@
+# Blueprint do Render. O deploy automático parte do branch main e não espera pelos checks do GitHub Actions.
+# Segredos ficam com sync: false: o painel pede o valor na criação e não o grava neste ficheiro.
+services:
+  - type: web
+    name: florist-hub-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    branch: main
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    # Plano gratuito: sem preDeployCommand; migrações no arranque (EF só aplica o que falta).
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: Database__MigrateOnStartup
+        value: "true"
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_URL_UNPOOLED
+        sync: false
+      - key: Jwt__Key
+        sync: false
+      - key: Jwt__Issuer
+        value: FloristHub
+      - key: Jwt__Audience
+        value: FloristHubClients
+      - key: Cors__AllowedOrigins
+        sync: false
+      - key: App__BaseDomain
+        sync: false
+      - key: App__WebBaseUrl
+        sync: false
+      - key: Storage__Provider
+        value: R2
+      - key: Storage__S3__ServiceUrl
+        sync: false
+      - key: Storage__S3__Bucket
+        sync: false
+      - key: Storage__S3__AccessKeyId
+        sync: false
+      - key: Storage__S3__SecretAccessKey
+        sync: false
+      - key: Storage__S3__PublicBaseUrl
+        sync: false
+      - key: Storage__S3__Region
+        value: auto
+      - key: Storage__S3__ForcePathStyle
+        value: "true"
+      - key: Email__Provider
+        value: Log
+      - key: Email__ResendApiKey
+        sync: false
+      - key: Email__From
+        sync: false
+      # Base dos links de convite e dos outros emails. Se ficar vazio, a API usa App__WebBaseUrl.
+      - key: Email__WebBaseUrl
+        sync: false
+      # Stripe__Provider não entra neste blueprint. Fake só existe em Development e a API recusa-o em Production.
+      - key: Stripe__SecretKey
+        sync: false
+      - key: Stripe__PublishableKey
+        sync: false
+      - key: Stripe__WebhookSecret
+        sync: false
+      - key: Push__Provider
+        value: Log
+      - key: Push__FcmProjectId
+        sync: false
+      - key: Push__FcmServiceAccountJson
+        sync: false
+      - key: Sentry__Dsn
+        sync: false
+      - key: Serilog__MinimumLevel__Default
+        value: Information
+      - key: RecurringOrders__GenerationAdvanceDays
+        value: "3"
+      - key: RecurringOrders__PollIntervalSeconds
+        value: "60"
+      - key: RecurringOrders__GenerationLeaseSeconds
+        value: "120"

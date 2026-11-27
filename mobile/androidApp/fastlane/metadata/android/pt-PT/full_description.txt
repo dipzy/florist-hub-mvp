@@ -1,0 +1,5 @@
+A Florist Hub liga-o à florista da sua zona. Monte o arranjo, veja o portefólio e envie a encomenda. A florista confirma, propõe uma alteração ou recusa antes de haver pagamento.
+
+Depois da confirmação, pague no browser com os métodos que a florista tiver activos. Acompanhe o estado da encomenda e receba um aviso quando ela avança.
+
+A política de privacidade está na loja web, em /legal/privacidade.

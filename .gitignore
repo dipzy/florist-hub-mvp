@@ -1,0 +1,52 @@
+# .NET
+**/bin/
+**/obj/
+**/.vs/
+*.user
+*.suo
+logs/
+uploads/
+TestResults/
+
+# Node / Vite
+node_modules/
+web/dist/
+.env
+.env.local
+.env.*
+!.env.example
+
+# Kotlin / Gradle / Android
+**/.gradle/
+**/build/
+**/.kotlin/
+local.properties
+*.apk
+*.aab
+*.ipa
+*.jks
+*.keystore
+.cxx/
+mobile/.android-sdk/
+.android-sdk/
+
+# iOS / Xcode
+DerivedData/
+*.xcuserdata/
+xcuserdata/
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+appsettings.*.local.json
+**/secrets.json
+mobile/androidApp/google-services.json
+mobile/iosApp/**/GoogleService-Info.plist
+**/*-firebase-adminsdk-*.json
