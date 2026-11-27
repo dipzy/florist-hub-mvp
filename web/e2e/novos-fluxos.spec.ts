@@ -7,7 +7,6 @@ const DEMO_PASSWORD = 'DemoFlorist1!';
 const CUSTOMER_EMAIL = 'cliente@demo.floristhub.pt';
 const FLORIST_EMAIL = 'florista@demo.floristhub.pt';
 const ADMIN_EMAIL = 'admin@demo.floristhub.pt';
-const LINA_TENANT_ID = '11111111-1111-1111-1111-111111111101';
 const SHOTS = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../docs/screenshots');
 
 const viewports = [
@@ -60,20 +59,9 @@ async function resetSession(page: Page) {
   await acceptCookies(page);
 }
 
-async function selectDemoStore(page: Page) {
-  const store = page.getByLabel('Loja');
-  await expect(store).toBeVisible({ timeout: 30_000 });
-  await expect.poll(async () => store.locator('option').count()).toBeGreaterThan(1);
-  await store.selectOption(LINA_TENANT_ID);
-}
-
 async function login(page: Page, email: string, role: 'cliente' | 'florista' | 'superadmin') {
+  // A loja vem do ?tenant= do endereço; a SuperAdmin entra no mesmo formulário.
   await resetSession(page);
-  if (role === 'superadmin') {
-    await page.getByLabel('Entrar como SuperAdmin (plataforma)').check();
-  } else {
-    await selectDemoStore(page);
-  }
   await page.getByLabel('Correio eletrónico').fill(email);
   await page.getByLabel('Palavra-passe').fill(DEMO_PASSWORD);
   await page.getByRole('button', { name: 'Entrar' }).click();
