@@ -1,6 +1,7 @@
 using System.Net;
 using FloristHub.DAL.Constants;
 using FloristHub.DAL.Seed;
+using FloristHub.Services.DTOs.Auth;
 
 namespace FloristHub.Api.IntegrationTests;
 
@@ -94,18 +95,58 @@ public sealed class DualRoleAndTenantCreateTests
             tenant.Id);
         Assert.Equal(Roles.SuperAdmin, storeLogin.Role);
 
-        var foreignLogin = await authClient.SendJsonAsync(HttpMethod.Post, "/api/auth/login", new
-        {
-            email = DevelopmentDataSeeder.SuperAdminEmail,
-            password = ApiTestClient.Demo.Password,
-            tenantId = ApiTestClient.Demo.TenantCampo,
-        });
+        // A SuperAdmin always signs in to the platform context (ac8e48d), even from another store's page: the
+        // token carries no store, so it gives no access to that store.
+        var foreignLogin = await authClient.LoginAuthAsync(
+            DevelopmentDataSeeder.SuperAdminEmail,
+            ApiTestClient.Demo.Password,
+            ApiTestClient.Demo.TenantCampo);
+        Assert.Equal(Roles.SuperAdmin, foreignLogin.Role);
+        Assert.Null(foreignLogin.TenantId);
+
+        // Membership is what decides the store context: the own store is allowed, a foreign one is not.
+        var session = new ApiTestClient(_fixture.Factory.CreateClient());
+        session.UseBearerToken(foreignLogin.Token);
+        var ownStore = await session.SendJsonAsync(HttpMethod.Post, "/api/auth/switch-context", new { kind = AuthContextKinds.Florist, tenantId = tenant.Id });
+        Assert.Equal(HttpStatusCode.OK, ownStore.StatusCode);
+        var foreignStore = await session.SendJsonAsync(
+            HttpMethod.Post,
+            "/api/auth/switch-context",
+            new { kind = AuthContextKinds.Florist, tenantId = ApiTestClient.Demo.TenantCampo });
         Assert.True(
-            foreignLogin.StatusCode is HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden,
-            $"Login estrangeiro devia falhar, obteve {(int)foreignLogin.StatusCode}");
+            foreignStore.StatusCode is HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden,
+            $"Mudar para uma loja sem pertença devia falhar, obteve {(int)foreignStore.StatusCode}");
+
+        // Pointing the platform token at the foreign store gives no access to its florist panel.
+        var platformSession = new ApiTestClient(_fixture.Factory.CreateClient());
+        platformSession.UseBearerToken(foreignLogin.Token);
+        platformSession.UseTenantHeaders(ApiTestClient.Demo.TenantCampo);
+        Assert.Equal(HttpStatusCode.Forbidden, (await platformSession.GetAsync("/api/florist/reviews")).StatusCode);
 
         var platformAgain = await authClient.LoginAuthAsync(DevelopmentDataSeeder.SuperAdminEmail, ApiTestClient.Demo.Password);
         Assert.Equal(Roles.SuperAdmin, platformAgain.Role);
+    }
+
+    [Theory]
+    [InlineData("florist")]
+    [InlineData("customer")]
+    public async Task Florists_and_customers_cannot_sign_in_to_a_store_they_do_not_belong_to(string who)
+    {
+        var email = who == "florist" ? ApiTestClient.Demo.FloristLinaEmail : ApiTestClient.Demo.CustomerEmail;
+        var client = new ApiTestClient(_fixture.Factory.CreateClient());
+
+        var foreign = await client.SendJsonAsync(HttpMethod.Post, "/api/auth/login", new
+        {
+            email,
+            password = ApiTestClient.Demo.Password,
+            tenantId = ApiTestClient.Demo.TenantCampo,
+        });
+
+        Assert.True(
+            foreign.StatusCode is HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden,
+            $"Login numa loja sem pertença devia falhar, obteve {(int)foreign.StatusCode}");
+        // The same account signs in to its own store.
+        Assert.NotNull(await client.LoginAuthAsync(email, ApiTestClient.Demo.Password, ApiTestClient.Demo.TenantLina));
     }
 
     [Fact]

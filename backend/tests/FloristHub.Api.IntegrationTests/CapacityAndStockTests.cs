@@ -1,5 +1,6 @@
 using System.Net;
 using FloristHub.DAL.Constants;
+using FloristHub.DAL.Enums;
 using FloristHub.DAL.Legal;
 
 namespace FloristHub.Api.IntegrationTests;
@@ -134,7 +135,8 @@ public sealed class CapacityAndStockTests
     private static Task<HttpResponseMessage> PostOrder(ApiTestClient client, DateTimeOffset when, Guid? flowerId = null, int quantity = 1) =>
         client.SendJsonAsync(HttpMethod.Post, "/api/orders", new
         {
-            baseType = 0,
+            // Sponge: the default shape (sponge dome) does not take a jar, which the API refuses.
+            baseType = (int)ArrangementBaseType.Sponge,
             deliveryType = 0,
             requestedDeliveryAt = when,
             acceptTermsAndPrivacy = true,

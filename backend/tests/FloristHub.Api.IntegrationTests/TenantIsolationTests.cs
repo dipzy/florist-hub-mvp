@@ -210,6 +210,14 @@ public sealed class TenantIsolationTests
         var campoReviews = await other.ReadJsonAsync<List<ReviewRow>>(await other.GetAsync("/api/florist/reviews"));
         Assert.DoesNotContain(campoReviews!, r => r.OrderId == delivered.Id);
 
+        // New reviews wait for the florist's approval (d397ee6); only approved ones feed the store's rating.
+        var linaReviews = await florist.ReadJsonAsync<List<ReviewRow>>(await florist.GetAsync("/api/florist/reviews"));
+        var reviewId = linaReviews!.Single(r => r.OrderId == delivered.Id).Id;
+        var foreignApprove = await other.SendJsonAsync(HttpMethod.Post, $"/api/florist/reviews/{reviewId}/approve");
+        Assert.Equal(HttpStatusCode.NotFound, foreignApprove.StatusCode);
+        var approve = await florist.SendJsonAsync(HttpMethod.Post, $"/api/florist/reviews/{reviewId}/approve");
+        Assert.Equal(HttpStatusCode.OK, approve.StatusCode);
+
         var host = _fixture.Factory.CreateClient();
         using var robots = new HttpRequestMessage(HttpMethod.Get, "/robots.txt");
         robots.Headers.Host = $"{DevelopmentDataSeeder.DemoTenantSlug}.floristhub.test";

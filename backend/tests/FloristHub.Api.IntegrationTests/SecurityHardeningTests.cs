@@ -259,7 +259,8 @@ public sealed class SecurityHardeningTests
     private static Task<HttpResponseMessage> PostOrder(ApiTestClient client, DateTimeOffset when, Guid? flowerId = null) =>
         client.SendJsonAsync(HttpMethod.Post, "/api/orders", new
         {
-            baseType = 0,
+            // Sponge: the default shape (sponge dome) does not take a jar, which the API refuses.
+            baseType = (int)ArrangementBaseType.Sponge,
             deliveryType = 0,
             requestedDeliveryAt = when,
             acceptTermsAndPrivacy = true,

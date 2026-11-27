@@ -23,7 +23,7 @@ public sealed class TenantDirectoryAndLoginTests
     public async Task Resolve_by_slug_returns_single_store_without_directory()
     {
         var client = new ApiTestClient(_fixture.Factory.CreateClient());
-        var res = await client.GetAsync("/api/tenants/resolve/lina");
+        var res = await client.GetAsync($"/api/tenants/resolve/{DevelopmentDataSeeder.DemoTenantSlug}");
         res.EnsureSuccessStatusCode();
         var body = await client.ReadJsonAsync<ResolveBody>(res);
         Assert.NotNull(body);

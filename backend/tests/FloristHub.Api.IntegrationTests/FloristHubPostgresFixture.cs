@@ -11,6 +11,8 @@ namespace FloristHub.Api.IntegrationTests;
 
 public sealed class FloristHubPostgresFixture : IAsyncLifetime
 {
+    private const string JwtKey = "FloristHub_Test_Signing_Key_Min_32_Chars";
+
     private PostgreSqlContainer? _container;
 
     public WebApplicationFactory<Program> Factory { get; private set; } = null!;
@@ -50,6 +52,17 @@ public sealed class FloristHubPostgresFixture : IAsyncLifetime
                 builder.UseSetting("ConnectionStrings:DefaultConnection", ConnectionString);
                 builder.UseEnvironment("Development");
                 builder.UseSetting("ConnectionStrings:DefaultConnection", ConnectionString);
+                // Host settings, not ConfigureAppConfiguration: Program.cs and the service registration read these
+                // while building the host, before in-memory settings apply. As in-memory values, the issued tokens
+                // never validated ("The signature key was not found"), the auth rate limit was never switched off
+                // (429s depending on test order), and the email/payment providers came from whatever the machine had
+                // (a developer with Resend configured would send real emails from the suite).
+                builder.UseSetting("Jwt:Key", JwtKey);
+                builder.UseSetting("Jwt:Issuer", "FloristHub");
+                builder.UseSetting("Jwt:Audience", "FloristHubClients");
+                builder.UseSetting("Features:DisableRateLimiting", "true");
+                builder.UseSetting("Email:Provider", "Log");
+                builder.UseSetting("Stripe:Provider", "Fake");
                 builder.ConfigureTestServices(services =>
                 {
                     services.AddAuthentication(options =>
@@ -78,14 +91,8 @@ public sealed class FloristHubPostgresFixture : IAsyncLifetime
                     {
                         ["ConnectionStrings:DefaultConnection"] = ConnectionString,
                         ["Database:MigrateOnStartup"] = "true",
-                        ["Jwt:Key"] = "FloristHub_Test_Signing_Key_Min_32_Chars",
                         ["App:BaseDomain"] = "floristhub.test",
                         ["Cors:Origins:0"] = "http://localhost:5173",
-                        ["Email:Provider"] = "Log",
-                        ["Features:DisableRateLimiting"] = "true",
-                        ["Jwt:Issuer"] = "FloristHub",
-                        ["Jwt:Audience"] = "FloristHubClients",
-                        ["Stripe:Provider"] = "Fake",
                     });
                 });
             });
